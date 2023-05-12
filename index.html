@@ -9,10 +9,25 @@
     <title>Calculadora</title>
 </head>
 <body>
-    <input id="operacionInput" type="text">
-    <p id="operacion">aqui se mostrarala operacion</p>
+    <input id="operacionInput" type="text" placeholder="Aqui se mostrara la operacion y el resultado" class="w-[500px]">
+   
     <p id="resultado">El total es : 0</p>
-    <div class="flex gap-5 ">
+<div class="flex flex-col gap-2">
+    <!-- Numeros -->
+    <div class="flex gap-5">
+        <button  id="numeroCero" class="rounde-lg border-2 border-solid">0</button>
+        <button  id="numeroUno" class="rounde-lg border-2 border-solid" >1</button>
+        <button id="numeroDos" class="rounde-lg border-2 border-solid" >2</button>
+        <button id="numeroTres" class="rounde-lg border-2 border-solid" >3</button>
+        <button id="numeroCuatro" class="rounde-lg border-2 border-solid" >4</button>
+        <button id="numeroCinco" class="rounde-lg border-2 border-solid" >5</button>
+        <button id="numeroSeis" class="rounde-lg border-2 border-solid" >6</button>
+        <button id="numeroSiete" class="rounde-lg border-2 border-solid" >7</button>
+        <button id="numeroOcho" class="rounde-lg border-2 border-solid" >8</button>
+        <button id="numeroNueve" class="rounde-lg border-2 border-solid" >9</button>
+    </div>
+    <!-- Operadores -->
+    <div class="flex flex-colitems-center gap-5 ">
         <button class="rounde-lg border-2 border-solid" id="botonSumar">+</button>
         <button class="rounde-lg border-2 border-solid" id="botonRestar">-</button>
         <button class="rounde-lg border-2 border-solid" id="botonMultiplicar">*</button>
@@ -20,7 +35,7 @@
         <button class="rounde-lg border-2 border-solid" id="botonIgual">=</button>
         <button class="rounde-lg border-2 border-solid" id="botonClear">C</button>
     </div>
-    
+</div>
     
 </body>
 <script src="./calculadora.js"></script>
