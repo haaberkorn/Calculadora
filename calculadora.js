@@ -13,19 +13,26 @@ let numeroBoton = document.getElementById("numeroBoton");
 let numeroBotonDos = document.getElementById("numeroBotonDos");
 let numeroBotonMas = document.getElementById("numeroBotonMas");
 
-const calculadora = () =>{
-    if(botonIgual === false){
-        numeroBoton();
-    }
+
 numeroBoton.addEventListener("click", () =>{
-    if(operacionInput.value === ""){
+    if((operacionInput.value === "") || (operacionInput.value != "") ){
         operacionInput.value += numeroBoton.innerText;
+    }else if(numeroBotonMas != false){
+        operacionInput.value = numeroBotonMas.innerText;
+        console.log(`Se presiono el +`);
     }else{
-        operacionInput.value += numeroBoton.innerText;
+        console.log("hay que ver que es esto")
     }
 })
-}
-botonIgual.addEventListener("click", calculadora)
+
+numeroBotonDos.addEventListener("click", () =>{
+    if(operacionInput.value === ""){
+        operacionInput.value += numeroBotonDos.innerText;
+    }else{
+        operacionInput.value += numeroBotonDos.innerText;
+    }
+})
+
 
 /* numeroBotonDos.addEventListener("click", () =>{
     operacionInput.value = numeroBotonDos.innerText;
