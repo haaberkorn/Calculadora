@@ -9,12 +9,55 @@ let operacionInput = document.getElementById("operacionInput");
 
 /* Numeros */
 /* let numeroUno = document.getElementById("numeroUno"); */
-let numeroBoton = document.getElementById("numeroBoton");
+const numeroBoton = document.getElementById("numeroBoton");
 let numeroBotonDos = document.getElementById("numeroBotonDos");
 let numeroBotonMas = document.getElementById("numeroBotonMas");
+let numeroBotonIgual = document.getElementById("numeroBotonIgual");
+let general = document.getElementById("general");
+let guardar = ""
+
+general.addEventListener("click", (e)=>{
+    /* console.dir(e.target.textContent); */
+    /* Con esto podemos saber  donde hemos hecho click en el contenedor padre */
+    /* console.log(e.target.textContent); */
+    if(e.target.textContent == 1){
+        console.log("Esto es un 1")
+    }
+})
 
 
-numeroBoton.addEventListener("click", () =>{
+
+
+/* const calculadora = () =>{ 
+
+    numeroBoton.onclick = () =>{        
+        if((operacionInput.value === "") || (operacionInput.value != "") ){
+            operacionInput.value += numeroBoton.innerText;
+            console.log(`${operacionInput.value}`)
+    }
+}  
+    numeroBotonDos.onclick = () =>{
+        if((operacionInput.value === "") || (operacionInput.value != "") ){
+            operacionInput.value += numeroBotonDos.innerText;
+            console.log(`${operacionInput.value}`)
+}
+}
+    numeroBotonMas.onclick = () =>{
+        if((operacionInput.value != "") ){
+            operacionInput.value = `${numeroBoton.value} + ${numeroBotonDos.value}`
+            operacionInput.value = guardar
+            console.log(operacionInput.value)
+}
+}
+    numeroBotonIgual.onclick = () =>{
+        operacionInput.value += `${guardar}`
+        console.log(`${guardar}`)
+}
+}
+
+general.addEventListener("click", calculadora) */
+
+/* numeroBoton.addEventListener("click", () =>{
     if((operacionInput.value === "") || (operacionInput.value != "") ){
         operacionInput.value += numeroBoton.innerText;
     }else if(numeroBotonMas != false){
@@ -33,7 +76,7 @@ numeroBotonDos.addEventListener("click", () =>{
     }
 })
 
-
+ */
 /* numeroBotonDos.addEventListener("click", () =>{
     operacionInput.value = numeroBotonDos.innerText;
 })
