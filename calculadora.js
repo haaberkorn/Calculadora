@@ -1,31 +1,51 @@
 /* Operadores */
-let botonSumar = document.getElementById("botonSumar");
-let botonRestar = document.getElementById("botonRestar");
-let botonMultiplicar = document.getElementById("botonMultiplicar");
-let botonDividir = document.getElementById("botonDividir");
-let botonIgual = document.getElementById("botonIgual");
-let botonClear = document.getElementById("botonClear");
-let operacionInput = document.getElementById("operacionInput");
+const botonSumar = document.getElementById("botonSumar");
+const botonRestar = document.getElementById("botonRestar");
+const botonMultiplicar = document.getElementById("botonMultiplicar");
+const botonDividir = document.getElementById("botonDividir");
+const botonIgual = document.getElementById("botonIgual");
+const botonClear = document.getElementById("botonClear");
+const operacionInput = document.getElementById("operacionInput");
 
 /* Numeros */
-/* let numeroUno = document.getElementById("numeroUno"); */
+/* const numeroUno = document.getElementById("numeroUno"); */
 const numeroBoton = document.getElementById("numeroBoton");
-let numeroBotonDos = document.getElementById("numeroBotonDos");
-let numeroBotonMas = document.getElementById("numeroBotonMas");
-let numeroBotonIgual = document.getElementById("numeroBotonIgual");
-let general = document.getElementById("general");
-let guardar = ""
+const numeroBotonDos = document.getElementById("numeroBotonDos");
+const numeroBotonMas = document.getElementById("numeroBotonMas");
+const numeroBotonMenos = document.getElementById("numeroBotonMenos");
+const numeroBotonIgual = document.getElementById("numeroBotonIgual");
+const general = document.getElementById("general");
+const guardar = [];
+const keyner = document.getElementById("keyner");
+
 
 general.addEventListener("click", (e)=>{
-    /* console.dir(e.target.textContent); */
+    let numeroArray = [0,1,2,3,4,5,6,7,8,9];
+    let numeroArrayMap = []
+    let simboloArray = ["+","-","*","/"];
+    console.dir(e.target);
+    /* console.log(numeroArray); */
     /* Con esto podemos saber  donde hemos hecho click en el contenedor padre */
     /* console.log(e.target.textContent); */
-    if(e.target.textContent == 1){
-        console.log("Esto es un 1")
-    }
-})
+/*     if(e.target.value >= numeroArray){
+        operacionInput.value += e.target.textContent
+    }else if(e.target.value == simboloArray){
+        operacionInput.value += e.target.textContent
+    }  */
+    numeroArray.map(
+        (element) =>{
+            if(element == 1){
+            numeroArrayMap.push(element)
+            console.log(numeroArrayMap)
+            console.log(element)
+            operacionInput.value += numeroArrayMap[0]
+            operacionInput.textContent
+            }
+        }
+    )
 
-
+}
+)
 
 
 /* const calculadora = () =>{ 
