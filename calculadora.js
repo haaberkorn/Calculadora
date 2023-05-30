@@ -9,7 +9,7 @@ const operacionInput = document.getElementById("operacionInput");
 
 /* Numeros */
 /* const numeroUno = document.getElementById("numeroUno"); */
-const numeroBoton = document.getElementById("numeroBoton");
+let numeroBoton = document.getElementById("numeroBoton");
 const numeroBotonDos = document.getElementById("numeroBotonDos");
 const numeroBotonMas = document.getElementById("numeroBotonMas");
 const numeroBotonMenos = document.getElementById("numeroBotonMenos");
@@ -21,7 +21,7 @@ const keyner = document.getElementById("keyner");
 
 general.addEventListener("click", (e)=>{
     let numeroArray = [0,1,2,3,4,5,6,7,8,9];
-    let numeroArrayMap = []
+    let numeroArrayMap = "";
     let simboloArray = ["+","-","*","/"];
     console.dir(e.target);
     /* console.log(numeroArray); */
@@ -34,13 +34,16 @@ general.addEventListener("click", (e)=>{
     }  */
     numeroArray.map(
         (element) =>{
-            if(element == 1){
-            numeroArrayMap.push(element)
-            console.log(numeroArrayMap)
-            console.log(element)
-            operacionInput.value += numeroArrayMap[0]
-            operacionInput.textContent
-            }
+            /* console.log(element) */
+            if(element == 1 && numeroBoton == true && (operacionInput.value == "" || operacionInput.value != "")){
+                console.log(element)
+                numeroBoton = element
+                operacionInput.value += numeroBoton.textContent
+            }/* else if(element == 2 && (operacionInput.value == "" || operacionInput.value != "")){
+                console.log(element)
+                numeroBotonDos.value = element
+                operacionInput.value += numeroBotonDos.value
+            } */
         }
     )
 
