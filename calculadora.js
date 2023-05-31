@@ -50,21 +50,31 @@ const procesarInput = (guardar) =>{
         console.log("es un string");
         numeroGeneral.push(currentCaracter); 
     }else if(typeof UltimoCaracterNumeroGeneral == "string" ){
+
         numeroGeneral[numeroGeneral.length - 1] = currentCaracter;
     }
     }
     console.log(numeroGeneral);
+    procesarOperaciones();
 }
-/* Realizara las operaciones matematicas 
-    Se realizara un for para recorrer toda la lista general 
-    
 
-
-*/
 const procesarOperaciones = () =>{
-
+    let primerNumero = [];
+    let tipoDeOperacion = [];
+    let UltimoCaracterNumeroGeneral = numeroGeneral[numeroGeneral.length-1] 
+    for(caracter of numeroGeneral){
+        if(typeof caracter === "number"){
+            primerNumero.push(caracter);
+            console.log(`lista primerNumero ${primerNumero}`);
+        }else if (typeof caracter === "string"){
+            tipoDeOperacion.push(caracter);
+            console.log(`lista tipoOperacion ${tipoDeOperacion}`);
+        }else if (typeof UltimoCaracterNumeroGeneral == "string"){
+            numeroGeneral[numeroGeneral.length - 0] = tipoDeOperacion;
+        }
+       
+    }
     
-
 
 }
 
