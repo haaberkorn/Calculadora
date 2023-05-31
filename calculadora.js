@@ -15,50 +15,63 @@ const numeroBotonMas = document.getElementById("numeroBotonMas");
 const numeroBotonMenos = document.getElementById("numeroBotonMenos");
 const numeroBotonIgual = document.getElementById("numeroBotonIgual");
 const general = document.getElementById("general");
-const guardar = [];
 const keyner = document.getElementById("keyner");
+let numeroGeneral = [];
 
 
 general.addEventListener("click", (e)=>{
-    let numeroArray = [0,1,2,3,4,5,6,7,8,9];
-    let numeroArrayMap = "";
-    let simboloArray = ["+","-","*","/"];
     console.dir(e.target);
     /* console.log(numeroArray); */
     /* Con esto podemos saber  donde hemos hecho click en el contenedor padre */
     /* console.log(e.target.textContent); */
-/*     if(e.target.value >= numeroArray){
-        operacionInput.value += e.target.textContent
-    }else if(e.target.value == simboloArray){
-        operacionInput.value += e.target.textContent
-    }  */
-    numeroArray.map(
-        (element) =>{
-            /* console.log(element) */
-            if(element == 1 && numeroBoton == true && (operacionInput.value == "" || operacionInput.value != "")){
-                console.log(element)
-                numeroBoton = element
-                operacionInput.value += numeroBoton.textContent
-            }/* else if(element == 2 && (operacionInput.value == "" || operacionInput.value != "")){
-                console.log(element)
-                numeroBotonDos.value = element
-                operacionInput.value += numeroBotonDos.value
-            } */
-        }
-    )
-
+    let guardar  = e.target.value  
+    procesarInput(guardar)
 }
 )
 
+const procesarInput = (guardar) =>{
+    const caracteresArray = [0,1,2,3,4,5,6,7,8,9,"+","-","*","/","="];
+    let currentCaracter = caracteresArray.find(
+        /* recorro la lista de array y comparo el array con el numero guardar  y eso retorna el numero que se encontro */
+        (numero)=> numero == guardar
 
-/* const calculadora = () =>{ 
-
-    numeroBoton.onclick = () =>{        
-        if((operacionInput.value === "") || (operacionInput.value != "") ){
-            operacionInput.value += numeroBoton.innerText;
-            console.log(`${operacionInput.value}`)
+    );
+    if(currentCaracter == undefined){
+        return;
+    }else if(currentCaracter === "="){
+        return;
     }
-}  
+    let UltimoCaracterNumeroGeneral = numeroGeneral[numeroGeneral.length-1] 
+    if(typeof currentCaracter == "number"){
+        console.log("es un numero");    
+        numeroGeneral.push(currentCaracter);
+    }else if(typeof currentCaracter == "string" ){
+        if(typeof UltimoCaracterNumeroGeneral === "number"){
+        console.log("es un string");
+        numeroGeneral.push(currentCaracter); 
+    }else if(typeof UltimoCaracterNumeroGeneral == "string" ){
+        numeroGeneral[numeroGeneral.length - 1] = currentCaracter;
+    }
+    }
+    console.log(numeroGeneral);
+}
+/* Realizara las operaciones matematicas 
+    Se realizara un for para recorrer toda la lista general 
+    
+
+
+*/
+const procesarOperaciones = () =>{
+
+    
+
+
+}
+
+
+/*
+
+ const calculadora = () =>{ 
     numeroBotonDos.onclick = () =>{
         if((operacionInput.value === "") || (operacionInput.value != "") ){
             operacionInput.value += numeroBotonDos.innerText;
