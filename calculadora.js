@@ -17,7 +17,7 @@ const numeroBotonIgual = document.getElementById("numeroBotonIgual");
 const general = document.getElementById("general");
 const keyner = document.getElementById("keyner");
 let numeroGeneral = [];
-
+let acumuladoGeneral = 0;
 
 general.addEventListener("click", (e)=>{
     console.dir(e.target);
@@ -39,8 +39,11 @@ const procesarInput = (guardar) =>{
     if(currentCaracter == undefined){
         return;
     }else if(currentCaracter === "="){
+        procesarOperaciones();
+        numeroGeneral = []; 
         return;
     }
+
     let UltimoCaracterNumeroGeneral = numeroGeneral[numeroGeneral.length-1] 
     if(typeof currentCaracter == "number"){
         console.log("es un numero");    
@@ -50,34 +53,61 @@ const procesarInput = (guardar) =>{
         console.log("es un string");
         numeroGeneral.push(currentCaracter); 
     }else if(typeof UltimoCaracterNumeroGeneral == "string" ){
-
         numeroGeneral[numeroGeneral.length - 1] = currentCaracter;
     }
     }
     console.log(numeroGeneral);
-    procesarOperaciones();
+    
 }
 
 const procesarOperaciones = () =>{
-    let primerNumero = [];
-    let tipoDeOperacion = [];
-    let UltimoCaracterNumeroGeneral = numeroGeneral[numeroGeneral.length-1] 
-    for(caracter of numeroGeneral){
-        if(typeof caracter === "number"){
-            primerNumero.push(caracter);
-            console.log(`lista primerNumero ${primerNumero}`);
-        }else if (typeof caracter === "string"){
-            tipoDeOperacion.push(caracter);
-            console.log(`lista tipoOperacion ${tipoDeOperacion}`);
-        }else if (typeof UltimoCaracterNumeroGeneral == "string"){
-            numeroGeneral[numeroGeneral.length - 0] = tipoDeOperacion;
-        }
-       
+    let primerNumero = {
+        valor: "",
+        completado: false 
     }
-    
+    let segundoNumero = {
+        valor: "",
+        completado: false 
+    }
 
+    let tipoDeOperacion = "";
+    
+    let UltimoCaracterNumeroGeneral = numeroGeneral[numeroGeneral.length-1] 
+    
+    for(caracter of numeroGeneral){
+        if(typeof caracter === "number" && (primerNumero.completado == false)){
+            primerNumero.valor += caracter;
+            console.log(`lista primerNumero ${primerNumero.valor}`);    
+        }else if (typeof caracter === "string"){
+            tipoDeOperacion += caracter;
+            primerNumero.completado = true
+            console.log(`lista tipoOperacion ${tipoDeOperacion}`);
+        }else if(typeof caracter === "number" && (segundoNumero.completado == false)){
+            segundoNumero.valor += caracter;
+            console.log(`lista segundoNumero ${segundoNumero.valor}`);
+        }
+    }
+    let operacion = realizarOperacion(primerNumero.valor,segundoNumero.valor,tipoDeOperacion)
+    console.log(operacion);
 }
 
+const realizarOperacion = (primerNumero, segundoNumero,tipoOperacion) =>{
+    let valor1 = parseInt(primerNumero);
+    let valor2 = parseInt(segundoNumero);
+
+    switch (tipoOperacion) {
+        case "+":
+            return valor1 + valor2
+        case "-":
+            return valor1 - valor2
+        case "*":
+            return valor1 * valor2
+        case "/":
+            return valor1 / valor2
+        default:
+            break;
+    }
+}   
 
 /*
 
