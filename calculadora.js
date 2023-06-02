@@ -1,63 +1,85 @@
-/* Operadores */
-const botonSumar = document.getElementById("botonSumar");
-const botonRestar = document.getElementById("botonRestar");
-const botonMultiplicar = document.getElementById("botonMultiplicar");
-const botonDividir = document.getElementById("botonDividir");
-const botonIgual = document.getElementById("botonIgual");
-const botonClear = document.getElementById("botonClear");
+const resultado = document.getElementById("resultado");
 const operacionInput = document.getElementById("operacionInput");
-
-/* Numeros */
-/* const numeroUno = document.getElementById("numeroUno"); */
-let numeroBoton = document.getElementById("numeroBoton");
-const numeroBotonDos = document.getElementById("numeroBotonDos");
-const numeroBotonMas = document.getElementById("numeroBotonMas");
-const numeroBotonMenos = document.getElementById("numeroBotonMenos");
-const numeroBotonIgual = document.getElementById("numeroBotonIgual");
 const general = document.getElementById("general");
-const keyner = document.getElementById("keyner");
 let numeroGeneral = [];
 let acumuladoGeneral = 0;
 
 general.addEventListener("click", (e)=>{
-    console.dir(e.target);
+    /* console.dir(e.target); */
     /* console.log(numeroArray); */
     /* Con esto podemos saber  donde hemos hecho click en el contenedor padre */
     /* console.log(e.target.textContent); */
-    let guardar  = e.target.value  
-    procesarInput(guardar)
+    let elementoPresionado  = e.target.value  
+    procesarInput(elementoPresionado)
 }
 )
 
-const procesarInput = (guardar) =>{
+const procesarInput = (elementoPresionado) =>{
     const caracteresArray = [0,1,2,3,4,5,6,7,8,9,"+","-","*","/","="];
     let currentCaracter = caracteresArray.find(
         /* recorro la lista de array y comparo el array con el numero guardar  y eso retorna el numero que se encontro */
-        (numero)=> numero == guardar
-
+        (elemento)=> elemento == elementoPresionado
     );
     if(currentCaracter == undefined){
         return;
     }else if(currentCaracter === "="){
         procesarOperaciones();
-        numeroGeneral = []; 
+        numeroGeneral = [acumuladoGeneral];
+        resultado.innerText = acumuladoGeneral;
         return;
     }
 
+    modificarNumeroGeneral(currentCaracter);
+    operacionInput.value = quitarComas();
+}
+
+const modificarNumeroGeneral = (currentCaracter) =>{
     let UltimoCaracterNumeroGeneral = numeroGeneral[numeroGeneral.length-1] 
     if(typeof currentCaracter == "number"){
-        console.log("es un numero");    
         numeroGeneral.push(currentCaracter);
-    }else if(typeof currentCaracter == "string" ){
-        if(typeof UltimoCaracterNumeroGeneral === "number"){
-        console.log("es un string");
-        numeroGeneral.push(currentCaracter); 
-    }else if(typeof UltimoCaracterNumeroGeneral == "string" ){
-        numeroGeneral[numeroGeneral.length - 1] = currentCaracter;
+    }else if( typeof currentCaracter == "string" ){
+        if( typeof UltimoCaracterNumeroGeneral == "number"){
+            numeroGeneral.push(currentCaracter); 
+        }else if( typeof UltimoCaracterNumeroGeneral == "string" ){
+            //Si tengo un caracter al final y escribo otro lo sobreescribo
+            // ['2','3','+']
+            // ['2','3','-']
+            numeroGeneral[numeroGeneral.length - 1] = currentCaracter;  
+        }
     }
-    }
-    console.log(numeroGeneral);
+}
+
+const quitarComas = () =>{
+    let sinComaNumeroGeneral = numeroGeneral.toString();
+    let listaNuevaSinComaNumeroGeneral = sinComaNumeroGeneral.replaceAll(',','')
+    console.log(listaNuevaSinComaNumeroGeneral);
+    return listaNuevaSinComaNumeroGeneral;
+    // return numeroGeneral.toString().replaceAll(',', '');
     
+    // return numeroGeneral.toString().split(',').join();
+
+
+
+
+/*     let code = '12312-213123-1231312-41233441';
+    
+    //Forma 1
+    let listaSeparada = code.split('-');
+    console.log(listaSeparada);
+    //['12312', '213123', '1231312', '41233441']
+    let listaUnida = listaSeparada.join();
+    console.log(listaUnida);
+    //'12312213123123131241233441']
+    
+    //Forma2
+    let nuevaListaUnida = code.replaceAll('-', '')
+    console.log(nuevaListaUnida);
+
+    //Split cuando se usa vacio
+    let nombre = 'Mariana';
+    let letras = nombre.split('');
+    // [M,a,r,i,a,n,a] */
+
 }
 
 const procesarOperaciones = () =>{
@@ -72,28 +94,31 @@ const procesarOperaciones = () =>{
 
     let tipoDeOperacion = "";
     
-    let UltimoCaracterNumeroGeneral = numeroGeneral[numeroGeneral.length-1] 
+    /* let UltimoCaracterNumeroGeneral = numeroGeneral[numeroGeneral.length-1]  */
     
-    for(caracter of numeroGeneral){
-        if(typeof caracter === "number" && (primerNumero.completado == false)){
-            primerNumero.valor += caracter;
-            console.log(`lista primerNumero ${primerNumero.valor}`);    
-        }else if (typeof caracter === "string"){
-            tipoDeOperacion += caracter;
+    for(elementoNumeroGeneral of numeroGeneral){
+        //[ 2, 4, '+', 1, 2]
+        
+        if(typeof elementoNumeroGeneral === "number"   && (primerNumero.completado == false)){
+            if(acumuladoGeneral > 0){
+                primerNumero.valor = acumuladoGeneral.toString();
+            }else{
+                primerNumero.valor += elementoNumeroGeneral.toString();
+            }   
+        }else if (typeof elementoNumeroGeneral === "string"){
+            tipoDeOperacion += elementoNumeroGeneral;
             primerNumero.completado = true
-            console.log(`lista tipoOperacion ${tipoDeOperacion}`);
-        }else if(typeof caracter === "number" && (segundoNumero.completado == false)){
-            segundoNumero.valor += caracter;
-            console.log(`lista segundoNumero ${segundoNumero.valor}`);
+        }else if(typeof elementoNumeroGeneral === "number" && (segundoNumero.completado == false)){
+            segundoNumero.valor += elementoNumeroGeneral;
         }
     }
     let operacion = realizarOperacion(primerNumero.valor,segundoNumero.valor,tipoDeOperacion)
-    console.log(operacion);
+    acumuladoGeneral = operacion;
 }
 
 const realizarOperacion = (primerNumero, segundoNumero,tipoOperacion) =>{
-    let valor1 = parseInt(primerNumero);
-    let valor2 = parseInt(segundoNumero);
+    let valor1 = parseFloat(primerNumero);
+    let valor2 = parseFloat(segundoNumero);
 
     switch (tipoOperacion) {
         case "+":
@@ -108,76 +133,3 @@ const realizarOperacion = (primerNumero, segundoNumero,tipoOperacion) =>{
             break;
     }
 }   
-
-/*
-
- const calculadora = () =>{ 
-    numeroBotonDos.onclick = () =>{
-        if((operacionInput.value === "") || (operacionInput.value != "") ){
-            operacionInput.value += numeroBotonDos.innerText;
-            console.log(`${operacionInput.value}`)
-}
-}
-    numeroBotonMas.onclick = () =>{
-        if((operacionInput.value != "") ){
-            operacionInput.value = `${numeroBoton.value} + ${numeroBotonDos.value}`
-            operacionInput.value = guardar
-            console.log(operacionInput.value)
-}
-}
-    numeroBotonIgual.onclick = () =>{
-        operacionInput.value += `${guardar}`
-        console.log(`${guardar}`)
-}
-}
-
-general.addEventListener("click", calculadora) */
-
-/* numeroBoton.addEventListener("click", () =>{
-    if((operacionInput.value === "") || (operacionInput.value != "") ){
-        operacionInput.value += numeroBoton.innerText;
-    }else if(numeroBotonMas != false){
-        operacionInput.value = numeroBotonMas.innerText;
-        console.log(`Se presiono el +`);
-    }else{
-        console.log("hay que ver que es esto")
-    }
-})
-
-numeroBotonDos.addEventListener("click", () =>{
-    if(operacionInput.value === ""){
-        operacionInput.value += numeroBotonDos.innerText;
-    }else{
-        operacionInput.value += numeroBotonDos.innerText;
-    }
-})
-
- */
-/* numeroBotonDos.addEventListener("click", () =>{
-    operacionInput.value = numeroBotonDos.innerText;
-})
-numeroBotonMas.addEventListener("click", () =>{
-    operacionInput.value = numeroBotonMas.innerText;
-}) */
-/* const calculadora = () =>{
-    numeroUno.onclick = "document.getElementById('operacionInput').value = '1'";
-    numeroDos.innerText = "2"; 
-    botonSumar = "+";  
-    botonSumar.onclick = () =>{
-        if(botonSumar = true){
-            
-        }else{
-            console.log("el boton es false");
-        }
-    }
-    console.log(`El resultado del boton fue ${eval.botonSumar}`)
-    
-}
-botonIgual.addEventListener("click", calculadora) */
-
-/* const calculadora = () =>{
-    operacionInput.value = numeroUno.value
-
-}
-numeroUno.addEventListener("click", calculadora);
- */
