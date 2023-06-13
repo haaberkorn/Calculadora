@@ -94,17 +94,16 @@ const procesarOperaciones = () =>{
 
     let tipoDeOperacion = "";
     
-    /* let UltimoCaracterNumeroGeneral = numeroGeneral[numeroGeneral.length-1]  */
-    
     for(elementoNumeroGeneral of numeroGeneral){
         //[ 2, 4, '+', 1, 2]
         
-        if(typeof elementoNumeroGeneral === "number"   && (primerNumero.completado == false)){
+        if(typeof elementoNumeroGeneral === "number" && (primerNumero.completado == false)){
             if(acumuladoGeneral > 0){
                 primerNumero.valor = acumuladoGeneral.toString();
             }else{
                 primerNumero.valor += elementoNumeroGeneral.toString();
-            }   
+            }
+        
         }else if (typeof elementoNumeroGeneral === "string"){
             tipoDeOperacion += elementoNumeroGeneral;
             primerNumero.completado = true
